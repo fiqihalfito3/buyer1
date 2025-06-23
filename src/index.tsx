@@ -6,6 +6,8 @@ const app = new Hono<{ Bindings: Env }>();
 
 app.post('/', async (c) => {
   const body = await c.req.json();
+  console.log("hitted hono");
+
   return handleTelegramUpdate(body, c);
 });
 
