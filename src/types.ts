@@ -24,4 +24,4 @@ export interface Env {
     TELEGRAM_STATE: KVNamespace;
 }
 
-export type CommandHandler = (chatId: string, env: Env) => Promise<Response>;
+export type CommandHandler = (chatId: string, keyword: string, env: Env) => any;

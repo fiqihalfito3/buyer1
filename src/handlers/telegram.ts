@@ -1,15 +1,15 @@
 import { Context } from 'hono';
-import { CommandHandler, TelegramMessage } from '../types';
+import { CommandHandler, Env, TelegramMessage } from '../types';
 import { getState } from '../services/state';
 import { handleStart } from '../commands/start';
 import { handleInputCommand, handleInputStep, handleInputCallback } from '../commands/input';
 import { handleLihatBulanIni } from '../commands/lihatBulanIni';
 import { handleDefault } from '../commands/default';
 
-const commandMap: Record<string, CommandHandler> = {
-    '/start': handleStart,
-    '/input': handleInputCommand,
-    '/lihatbulanini': handleLihatBulanIni,
+const commandMap: Record<string, (chatId: string, env: Env) => any> = {
+    '/start': (chatId, env) => handleStart(chatId, "start", env),
+    '/input': (chatId, env) => handleInputCommand(chatId, env),
+    '/lihatbulanini': (chatId, env) => handleLihatBulanIni(chatId, "lihatbulanini", env),
 };
 
 export async function handleTelegramUpdate(body: TelegramMessage, c: Context) {

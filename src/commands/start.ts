@@ -1,7 +1,7 @@
 import { reply } from "../services/telegram";
-import type { CommandHandler } from "../types";
+import type { CommandHandler, Env } from "../types";
 
-export const handleStart: CommandHandler = async (chatId, env) => {
+export async function handleStart(chatId: string, keyword: string, env: Env) {
     console.log("hitted start");
     return reply(chatId, "👋 Halo! Gunakan perintah /input untuk mulai mencatat pengeluaran.", env);
 };
