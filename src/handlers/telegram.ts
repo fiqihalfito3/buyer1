@@ -24,6 +24,8 @@ export async function handleTelegramUpdate(body: TelegramMessage, c: Context) {
         return handleInputCallback(chatId, data, env); // delegasikan ke input.ts
     }
 
+    console.log(JSON.stringify(body));
+
     // Handle message teks biasa
     if (body.message?.text) {
         const chatId = body.message.chat.id.toString();

@@ -9,6 +9,7 @@ export const handleLihatBulanIni: CommandHandler = async (chatId, env) => {
         month: "long",
     });
 
-    const total = await hitungTotalPengeluaran(env);
+    const total = await hitungTotalPengeluaran(chatId, env);
     return reply(chatId, `💰 Total pengeluaran bulan ini *${namaBulanTahun}*: Rp${total.toLocaleString("id-ID")}`, env);
+    // return reply(chatId, `💰 Total pengeluaran bulan ini tes dulu`, env);
 };
