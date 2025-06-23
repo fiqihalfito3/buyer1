@@ -1,0 +1,21 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "mutasi_v2",
+    "compatibility_date": "2024-04-01",
+    "main": "./src/index.tsx",
+    "vars": {
+        "TELEGRAM_TOKEN": "7823679916:AAGPLub5GJ0UprX5Zd_eQqytfiqDurlBqmw",
+        "WEB_APP_URL": "https://script.google.com/macros/s/AKfycbzalA393GdNVU2d3PzmgIijSCP2zfKdGk3bUkPyvLMBCSiY8jx08Ny3aIDxDFM0sKBS/exec"
+    },
+    "observability": {
+        "logs": {
+            "enabled": true
+        }
+    },
+    "kv_namespaces": [
+        {
+            "binding": "TELEGRAM_STATE",
+            "id": "2e543f2a769a4187bcc1d81d7dc05441"
+        }
+    ]
+}
