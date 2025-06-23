@@ -13,6 +13,8 @@ const commandMap: Record<string, CommandHandler> = {
 };
 
 export async function handleTelegramUpdate(body: TelegramMessage, c: Context) {
+    console.log("hitted telegram handler");
+
     const env = c.env;
 
     // Handle callback (inline keyboard)
