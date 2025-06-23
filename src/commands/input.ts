@@ -41,7 +41,7 @@ export async function handleInputStep(chatId: string, text: string, state: UserS
         const res = await fetch(env.WEB_APP_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
+            body: JSON.stringify({ keyword: "input", optional: { payload } }),
         });
 
         await clearState(chatId, env);
