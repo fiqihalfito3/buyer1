@@ -18,9 +18,11 @@ export async function handleInputStep(chatId: string, text: string, state: UserS
         return sendInlineKeyboard(chatId, "📍 Pilih status kegiatan:", [
             [
                 { text: "✅ Kewajiban", callback_data: "status:Kewajiban" },
-                { text: "💚 Sedekah", callback_data: "status:Sedekah" },
-                { text: "🪙 Emas", callback_data: "status:Emas" },
-                { text: "🌍 Duniawi", callback_data: "status:Duniawi" },
+                { text: "💚 Sedekah", callback_data: "status:Sedekah" }
+            ],
+            [
+                { text: "🟨 Emas", callback_data: "status:Emas" },
+                { text: "🌍 Duniawi", callback_data: "status:Duniawi" }
             ],
         ], env);
     }

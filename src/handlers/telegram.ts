@@ -5,11 +5,13 @@ import { handleStart } from '../commands/start';
 import { handleInputCommand, handleInputStep, handleInputCallback } from '../commands/input';
 import { handleLihatBulanIni } from '../commands/lihatBulanIni';
 import { handleDefault } from '../commands/default';
+import { handleLihatSetiapBulan } from '../commands/lihatsetiapbulan';
 
 const commandMap: Record<string, CommandHandler> = {
     '/start': handleStart,
     '/input': handleInputCommand,
     '/lihatbulanini': handleLihatBulanIni,
+    '/lihatsetiapbulan': handleLihatSetiapBulan
 };
 
 export async function handleTelegramUpdate(body: TelegramMessage, c: Context) {
