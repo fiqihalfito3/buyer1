@@ -46,14 +46,11 @@ export async function handleInputStep(chatId: string, text: string, state: UserS
 
         await clearState(chatId, env);
 
-        const summary = `
-        ✅ Data berhasil disimpan!
-
-        📆 Tanggal: ${state.tanggal}
-        📝 Kegiatan: ${state.kegiatan}
-        📍 Status: ${state.status}
-        💰 Pengeluaran: Rp${state.pengeluaran?.toLocaleString("id-ID")}
-        `;
+        let summary = `✅ Data berhasil disimpan!\n\n`
+        summary += `📆 Tanggal: ${state.tanggal}\n`
+        summary += `📝 Kegiatan: ${state.kegiatan}\n`
+        summary += `📍 Status: ${state.status}\n`
+        summary += `💰 Pengeluaran: Rp${state.pengeluaran?.toLocaleString("id-ID")}`
 
         return reply(chatId, res.ok ? summary : "❌ Gagal menyimpan data ke Sheet.", env);
     }
