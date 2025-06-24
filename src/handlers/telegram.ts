@@ -6,10 +6,10 @@ import { handleInputCommand, handleInputStep, handleInputCallback } from '../com
 import { handleLihatBulanIni } from '../commands/lihatBulanIni';
 import { handleDefault } from '../commands/default';
 
-const commandMap: Record<string, (chatId: string, env: Env) => any> = {
-    '/start': (chatId, env) => handleStart(chatId, "start", env),
-    '/input': (chatId, env) => handleInputCommand(chatId, env),
-    '/lihatbulanini': (chatId, env) => handleLihatBulanIni(chatId, "lihatbulanini", env),
+const commandMap: Record<string, CommandHandler> = {
+    '/start': handleStart,
+    '/input': handleInputCommand,
+    '/lihatbulanini': handleLihatBulanIni,
 };
 
 export async function handleTelegramUpdate(body: TelegramMessage, c: Context) {
@@ -35,7 +35,7 @@ export async function handleTelegramUpdate(body: TelegramMessage, c: Context) {
         // Jika pesan adalah command dan terdaftar
         const commandHandler = commandMap[text.toLowerCase()];
         if (commandHandler) {
-            return commandHandler(chatId, env);
+            return commandHandler(chatId, text.toLowerCase(), env);
         }
 
         // Jika sedang dalam proses input

@@ -2,8 +2,9 @@ import type { Env } from "../types";
 import type { UserState } from "../types";
 import { reply, sendInlineKeyboard } from "../services/telegram";
 import { getState, setState, clearState } from "../services/state";
+import { fetchSheetData } from "../services/sheet";
 
-export async function handleInputCommand(chatId: string, env: Env) {
+export async function handleInputCommand(chatId: string, keyword: string, env: Env) {
     const state: UserState = { step: 1 };
     await setState(chatId, state, env);
     return reply(chatId, "📝 Apa kegiatan hari ini?", env);
@@ -38,11 +39,7 @@ export async function handleInputStep(chatId: string, text: string, state: UserS
             pengeluaran: state.pengeluaran,
         };
 
-        const res = await fetch(env.WEB_APP_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ keyword: "input", optional: { payload } }),
-        });
+        const res = await fetchSheetData("/input", { payload }, env)
 
         await clearState(chatId, env);
 

@@ -16,7 +16,7 @@ export async function hitungTotalPengeluaran(chatId: string, keyword: string, en
     const sheetName = now.toISOString().slice(0, 7); // yyyy-MM
     console.log("sheetname", sheetName);
 
-    const res = await fetchSheetData(keyword, { sheetName: sheetName }, env)
+    const res = await fetchSheetData(keyword, { sheetName }, env)
 
     if (!res.ok) {
         await reply(chatId, "gagal ambil data", env)
