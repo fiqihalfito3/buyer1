@@ -1,4 +1,4 @@
-import { Env } from '../types';
+import { Env, RekapHariIniResponse } from '../types';
 import { reply } from './telegram';
 
 export async function fetchSheetData(keyword: string, optional: any, env: Env) {
@@ -34,4 +34,21 @@ export async function hitungTotalSetiapBulan(chatId: string, keyword: string, en
 
     const data: { hasil: { bulan: string, total: number }[] } = await res.json()
     return data
+}
+
+export async function rekaphariini(chatId: string, keyword: string, env: Env) {
+    const res = await fetchSheetData(keyword, null, env)
+
+    if (!res.ok) {
+        await reply(chatId, "gagal ambil data", env)
+    }
+
+
+
+    const data: RekapHariIniResponse = await res.json()
+
+    return data
+
+
+
 }

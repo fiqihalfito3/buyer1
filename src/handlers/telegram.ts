@@ -6,12 +6,20 @@ import { handleInputCommand, handleInputStep, handleInputCallback } from '../com
 import { handleLihatBulanIni } from '../commands/lihatBulanIni';
 import { handleDefault } from '../commands/default';
 import { handleLihatSetiapBulan } from '../commands/lihatsetiapbulan';
+import { handleRekapHariIni } from '../commands/rekaphariini';
 
 const commandMap: Record<string, CommandHandler> = {
     '/start': handleStart,
     '/input': handleInputCommand,
-    '/lihatbulanini': handleLihatBulanIni,
-    '/lihatsetiapbulan': handleLihatSetiapBulan
+    '/totalbulanini': handleLihatBulanIni,
+    '/rekapsetiapbulan': handleLihatSetiapBulan,
+    '/rekaphariini': handleRekapHariIni,
+    // '/rekapkategoribulanini',
+    // '/rekapkategorihariini',
+    // '/rekapkategorisetiapbulan'
+    // '/pengeluaranterbesar'
+    // '/listhariini'
+    // '/persentasekategori'
 };
 
 export async function handleTelegramUpdate(body: TelegramMessage, c: Context) {
