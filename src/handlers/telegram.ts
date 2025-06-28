@@ -7,6 +7,7 @@ import { handleLihatBulanIni } from '../commands/lihatBulanIni';
 import { handleDefault } from '../commands/default';
 import { handleLihatSetiapBulan } from '../commands/lihatsetiapbulan';
 import { handleRekapHariIni } from '../commands/rekaphariini';
+import { handletesterror } from '../commands/testerror';
 
 const commandMap: Record<string, CommandHandler> = {
     '/start': handleStart,
@@ -20,6 +21,7 @@ const commandMap: Record<string, CommandHandler> = {
     // '/pengeluaranterbesar'
     // '/listhariini'
     // '/persentasekategori'
+    '/testerror': handletesterror
 };
 
 export async function handleTelegramUpdate(body: TelegramMessage, c: Context) {
@@ -41,6 +43,9 @@ export async function handleTelegramUpdate(body: TelegramMessage, c: Context) {
         const chatId = body.message.chat.id.toString();
         const text = body.message.text.trim();
         const state = await getState(chatId, env);
+
+        // save chat id in whole code
+        c.set("chatId", chatId)
 
         // Jika pesan adalah command dan terdaftar
         const commandHandler = commandMap[text.toLowerCase()];

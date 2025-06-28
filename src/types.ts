@@ -23,6 +23,7 @@ export interface Env {
     WEB_APP_URL: string;
     TELEGRAM_STATE: KVNamespace;
 }
+
 export type CommandHandlerParam = {
     chatId: string,
     keyword: string,

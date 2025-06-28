@@ -49,6 +49,10 @@ export async function rekaphariini(chatId: string, keyword: string, env: Env) {
 
     return data
 
+}
 
+export async function testerror(chatId: string, keyword: string, env: Env) {
+    const res = false
 
+    return res
 }

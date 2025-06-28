@@ -12,7 +12,7 @@ export async function handleRekapHariIni(chatId: string, keyword: string, env: E
         message += `Tidak ada pengeluaran yang tercatat hari ini. 👍`;
     } else {
         res.data.forEach((item, i) => {
-            message += `${i + 1}. ${item.kegiatan} — _${item.kategori}_: *Rp${item.pengeluaran.toLocaleString()}*\n`;
+            message += `${i + 1}. ${item.kegiatan} — ${item.kategori}: *Rp${item.pengeluaran.toLocaleString()}*\n`;
         });
 
         message += `\n💰 *Total Pengeluaran:* Rp${res.total.toLocaleString()}`;
