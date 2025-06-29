@@ -3,7 +3,6 @@ import { CommandHandler, Env, TelegramMessage } from '../types';
 import { getState } from '../services/state';
 import { handleStart } from '../commands/start';
 import { handleInputCommand, handleInputStep, handleInputCallback } from '../commands/input';
-import { handleLihatBulanIni } from '../commands/lihatBulanIni';
 import { handleDefault } from '../commands/default';
 import { handleRekapSetiapBulan } from '../commands/rekapsetiapbulan';
 import { handleRekapHariIni } from '../commands/rekaphariini';
@@ -13,10 +12,9 @@ import { handleRekapBulanIni } from '../commands/rekapbulanini';
 const commandMap: Record<string, CommandHandler> = {
     '/start': handleStart,
     '/input': handleInputCommand,
-    '/totalbulanini': handleLihatBulanIni,
-    '/rekapsetiapbulan': handleRekapSetiapBulan,
     '/rekaphariini': handleRekapHariIni,
     '/rekapbulanini': handleRekapBulanIni,
+    '/rekapsetiapbulan': handleRekapSetiapBulan,
     // '/rekapkategorisetiapbulan'
     // '/pengeluaranterbesar'
     // '/listhariini'
