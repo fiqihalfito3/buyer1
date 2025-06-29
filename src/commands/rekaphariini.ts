@@ -4,17 +4,21 @@ import { Env } from "../types";
 
 export interface PengeluaranItem {
     kegiatan: string;
-    kategori: string; // atau bisa enum 'Duniawi' | 'Kewajiban' | 'Emas' | 'Sedekah' jika ingin ketat
+    kategori: string;
     pengeluaran: number;
+}
+
+export interface KategoriRingkasan {
+    nama: string;
+    total: number;
+    persen: number;
 }
 
 export interface RekapHariIniResponse {
     tanggal: string; // contoh: "29 Juni 2025"
     total: number;
     data: PengeluaranItem[];
-    persentase: {
-        [kategori: string]: number; // misal: { Duniawi: 54.32, Sedekah: 10.00, ... }
-    };
+    kategori: KategoriRingkasan[];
 }
 
 
@@ -35,14 +39,10 @@ export async function handleRekapHariIni(chatId: string, keyword: string, env: E
 
         message += '\n*% Persentase harian*\n';
 
-        for (const kategori in res.persentase) {
-            if (Object.prototype.hasOwnProperty.call(res.persentase, kategori)) {
-                const persentase = res.persentase[kategori];
 
-                message += `${kategori} : ${persentase}%\n`
-
-            }
-        }
+        res.kategori.forEach((item, i) => {
+            message += `${item.nama} : *${item.persen}%* (Rp${item.total.toLocaleString()})\n`
+        })
 
 
         message += `\n💰 *Total Pengeluaran:* Rp${res.total.toLocaleString()}`;

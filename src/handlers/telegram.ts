@@ -17,7 +17,6 @@ const commandMap: Record<string, CommandHandler> = {
     '/rekapsetiapbulan': handleRekapSetiapBulan,
     // '/rekapkategorisetiapbulan'
     // '/pengeluaranterbesar'
-    // '/listhariini'
     // '/persentasekategori'
     '/testerror': handletesterror
 };
