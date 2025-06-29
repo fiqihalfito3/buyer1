@@ -24,8 +24,8 @@ export async function handleRekapBulanIni(chatId: string, keyword: string, env: 
         "Rp" + num.toLocaleString("id-ID");
 
     let pesan = `📆 *Rekap Pengeluaran Bulan ${bulan}*\n\n`;
-    pesan += `💰 *Total*: ${formatRupiah(total)}\n\n`;
-    pesan += `📊 Rincian per Kategori:\n`;
+    pesan += `💰*Total: *${formatRupiah(total)}*\n\n`;
+    pesan += `📊 *Rincian per Kategori:*\n`;
 
     for (const kategori of Object.keys(jumlah)) {
         const nominal = formatRupiah(jumlah[kategori]);

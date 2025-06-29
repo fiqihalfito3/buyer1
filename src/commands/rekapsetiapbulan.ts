@@ -9,7 +9,7 @@ interface RekapSetiapBulanResponse {
     }[]
 }
 
-export const handleLihatSetiapBulan: CommandHandler = async (chatId, keyword, env) => {
+export const handleRekapSetiapBulan: CommandHandler = async (chatId, keyword, env) => {
 
     // const data = await hitungTotalSetiapBulan(chatId, keyword, env);
     const res = await fetchSheetData(keyword, null, env) as RekapSetiapBulanResponse;

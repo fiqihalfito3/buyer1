@@ -5,7 +5,7 @@ import { handleStart } from '../commands/start';
 import { handleInputCommand, handleInputStep, handleInputCallback } from '../commands/input';
 import { handleLihatBulanIni } from '../commands/lihatBulanIni';
 import { handleDefault } from '../commands/default';
-import { handleLihatSetiapBulan } from '../commands/lihatsetiapbulan';
+import { handleRekapSetiapBulan } from '../commands/rekapsetiapbulan';
 import { handleRekapHariIni } from '../commands/rekaphariini';
 import { handletesterror } from '../commands/testerror';
 import { handleRekapBulanIni } from '../commands/rekapbulanini';
@@ -14,7 +14,7 @@ const commandMap: Record<string, CommandHandler> = {
     '/start': handleStart,
     '/input': handleInputCommand,
     '/totalbulanini': handleLihatBulanIni,
-    '/rekapsetiapbulan': handleLihatSetiapBulan,
+    '/rekapsetiapbulan': handleRekapSetiapBulan,
     '/rekaphariini': handleRekapHariIni,
     '/rekapbulanini': handleRekapBulanIni,
     // '/rekapkategorisetiapbulan'
