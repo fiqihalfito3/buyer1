@@ -35,16 +35,16 @@ export async function hitungTotalPengeluaran(chatId: string, keyword: string, en
     return data.total || 0;
 }
 
-export async function hitungTotalSetiapBulan(chatId: string, keyword: string, env: Env) {
-    const res = await fetchSheetData(keyword, null, env)
+// export async function hitungTotalSetiapBulan(chatId: string, keyword: string, env: Env) {
+//     const res = await fetchSheetData(keyword, null, env)
 
-    if (!res.ok) {
-        await reply(chatId, "gagal ambil data", env)
-    }
+//     if (!res.ok) {
+//         await reply(chatId, "gagal ambil data", env)
+//     }
 
-    const data: { hasil: { bulan: string, total: number }[] } = await res.json()
-    return data
-}
+//     const data: { hasil: { bulan: string, total: number }[] } = await res.json()
+//     return data
+// }
 
 // export async function rekaphariini(chatId: string, keyword: string, env: Env) {
 //     const res = await fetchSheetData(keyword, null, env)
