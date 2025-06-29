@@ -46,20 +46,20 @@ export async function hitungTotalSetiapBulan(chatId: string, keyword: string, en
     return data
 }
 
-export async function rekaphariini(chatId: string, keyword: string, env: Env) {
-    const res = await fetchSheetData(keyword, null, env)
+// export async function rekaphariini(chatId: string, keyword: string, env: Env) {
+//     const res = await fetchSheetData(keyword, null, env)
 
-    if (!res.ok) {
-        await reply(chatId, "gagal ambil data", env)
-    }
+//     if (!res.ok) {
+//         await reply(chatId, "gagal ambil data", env)
+//     }
 
 
 
-    const data: RekapHariIniResponse = await res.json()
+//     const data: RekapHariIniResponse = await res.json()
 
-    return data
+//     return data
 
-}
+// }
 
 export async function testerror(chatId: string, keyword: string, env: Env) {
     const res = false

@@ -1,10 +1,27 @@
-import { rekaphariini } from "../services/sheet";
+import { fetchSheetData } from "../services/sheet";
 import { reply } from "../services/telegram";
 import { Env } from "../types";
 
+export interface PengeluaranItem {
+    kegiatan: string;
+    kategori: string; // atau bisa enum 'Duniawi' | 'Kewajiban' | 'Emas' | 'Sedekah' jika ingin ketat
+    pengeluaran: number;
+}
+
+export interface RekapHariIniResponse {
+    tanggal: string; // contoh: "29 Juni 2025"
+    total: number;
+    data: PengeluaranItem[];
+    persentase: {
+        [kategori: string]: number; // misal: { Duniawi: 54.32, Sedekah: 10.00, ... }
+    };
+}
+
+
 export async function handleRekapHariIni(chatId: string, keyword: string, env: Env) {
 
-    const res = await rekaphariini(chatId, keyword, env)
+    // const res = await rekaphariini(chatId, keyword, env)
+    const res = await fetchSheetData(keyword, null, env) as RekapHariIniResponse
 
 
     let message = `📊 *Rekap Pengeluaran Hari Ini*\n🗓️ ${res.tanggal}\n\n`;
