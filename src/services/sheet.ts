@@ -8,7 +8,17 @@ export async function fetchSheetData(keyword: string, optional: any, env: Env) {
         body: JSON.stringify({ keyword: keyword, optional: optional })
     });
 
-    return res
+    if (!res.ok) {
+        throw new Error("Gagal mengambil data");
+    }
+
+    const data: any = await res.json()
+
+    if ("error" in data) {
+        throw new Error(data.error);
+    }
+
+    return data
 }
 
 export async function hitungTotalPengeluaran(chatId: string, keyword: string, env: Env): Promise<number> {

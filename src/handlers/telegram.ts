@@ -8,6 +8,7 @@ import { handleDefault } from '../commands/default';
 import { handleLihatSetiapBulan } from '../commands/lihatsetiapbulan';
 import { handleRekapHariIni } from '../commands/rekaphariini';
 import { handletesterror } from '../commands/testerror';
+import { handleRekapBulanIni } from '../commands/rekapbulanini';
 
 const commandMap: Record<string, CommandHandler> = {
     '/start': handleStart,
@@ -15,7 +16,7 @@ const commandMap: Record<string, CommandHandler> = {
     '/totalbulanini': handleLihatBulanIni,
     '/rekapsetiapbulan': handleLihatSetiapBulan,
     '/rekaphariini': handleRekapHariIni,
-    // '/rekapkategoribulanini',
+    '/rekapbulanini': handleRekapBulanIni,
     // '/rekapkategorisetiapbulan'
     // '/pengeluaranterbesar'
     // '/listhariini'
