@@ -6,6 +6,7 @@ export async function handleRekapHariIni(chatId: string, keyword: string, env: E
 
     const res = await rekaphariini(chatId, keyword, env)
 
+
     let message = `📊 *Rekap Pengeluaran Hari Ini*\n🗓️ ${res.tanggal}\n\n`;
 
     if (res.data.length === 0) {
@@ -14,6 +15,18 @@ export async function handleRekapHariIni(chatId: string, keyword: string, env: E
         res.data.forEach((item, i) => {
             message += `${i + 1}. ${item.kegiatan} — ${item.kategori}: *Rp${item.pengeluaran.toLocaleString()}*\n`;
         });
+
+        message += '*%* Persentase harian\n\n';
+
+        for (const kategori in res.persentase) {
+            if (Object.prototype.hasOwnProperty.call(res.persentase, kategori)) {
+                const persentase = res.persentase[kategori];
+
+                message += `${kategori} : ${persentase}%\n`
+
+            }
+        }
+
 
         message += `\n💰 *Total Pengeluaran:* Rp${res.total.toLocaleString()}`;
     }

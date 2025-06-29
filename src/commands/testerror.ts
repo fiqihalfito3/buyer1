@@ -3,11 +3,11 @@ import { reply } from "../services/telegram";
 import { Env } from "../types";
 
 export async function handletesterror(chatId: string, keyword: string, env: Env) {
-    const res = testerror
+    const res = await testerror(chatId, keyword, env)
 
     if (!res) {
         throw new Error("test Error berhasil - data error");
     }
 
-    return reply(chatId, "Test error - data exist", env)
+    throw new Error("test Error berhasil - data exist");
 }

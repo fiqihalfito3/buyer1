@@ -31,7 +31,8 @@ app.onError(async (err, c) => {
   const chatId = c.get("chatId")
 
   await reply(chatId, err.message, c.env)
-  
+
+  // not working below because reply return responds
   return c.json({
     chatId: chatId,
     error: err.message

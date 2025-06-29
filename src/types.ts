@@ -32,16 +32,17 @@ export type CommandHandlerParam = {
 export type CommandHandler = (chatId: string, keyword: string, env: Env) => any;
 
 
-export type Kategori = 'Duniawi' | 'Kewajiban' | 'Emas' | 'Sedekah';
-
 export interface PengeluaranItem {
     kegiatan: string;
-    kategori: Kategori;
+    kategori: string; // atau bisa enum 'Duniawi' | 'Kewajiban' | 'Emas' | 'Sedekah' jika ingin ketat
     pengeluaran: number;
 }
 
 export interface RekapHariIniResponse {
-    tanggal: string; // contoh: "28 Juni 2025"
+    tanggal: string; // contoh: "29 Juni 2025"
     total: number;
     data: PengeluaranItem[];
+    persentase: {
+        [kategori: string]: number; // misal: { Duniawi: 54.32, Sedekah: 10.00, ... }
+    };
 }
