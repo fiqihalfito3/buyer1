@@ -16,7 +16,7 @@ export async function handleRekapHariIni(chatId: string, keyword: string, env: E
             message += `${i + 1}. ${item.kegiatan} — ${item.kategori}: *Rp${item.pengeluaran.toLocaleString()}*\n`;
         });
 
-        message += '*%* Persentase harian\n\n';
+        message += '\n*% Persentase harian*\n\n';
 
         for (const kategori in res.persentase) {
             if (Object.prototype.hasOwnProperty.call(res.persentase, kategori)) {
