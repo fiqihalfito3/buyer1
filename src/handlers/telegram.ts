@@ -1,6 +1,6 @@
 import { Context } from 'hono';
 import { Env, TelegramMessage } from '../types';
-import { getState } from '../services/state';
+import { clearState, getState } from '../services/state';
 import { handleDefault } from '../commands/default';
 import { executeCallback, executeStepCommand, executeStepFlow, getSimpleCommandHandler, getStepCommandConfig } from '../services/command-router';
 
@@ -34,6 +34,7 @@ export async function handleTelegramUpdate(body: TelegramMessage, c: Context): P
         // Check if it's a simple command
         const simpleHandler = getSimpleCommandHandler(text);
         if (simpleHandler) {
+            await clearState(chatId, env);
             return simpleHandler(chatId, text.toLowerCase(), env);
         }
 
