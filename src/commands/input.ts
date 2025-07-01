@@ -42,7 +42,7 @@ export async function handleInputStep(chatId: string, text: string, state: UserS
             pengeluaran: state.pengeluaran,
         };
 
-        const res = await fetchSheetData("/input", { payload }, env)
+        const res: { success: boolean } = await fetchSheetData("/input", { payload }, env)
 
         await clearState(chatId, env);
 
@@ -52,7 +52,7 @@ export async function handleInputStep(chatId: string, text: string, state: UserS
         summary += `📍 Status: ${state.status}\n`
         summary += `💰 Pengeluaran: Rp${state.pengeluaran?.toLocaleString("id-ID")}`
 
-        return reply(chatId, res.ok ? summary : "❌ Gagal menyimpan data ke Sheet.", env);
+        return reply(chatId, res.success ? summary : "❌ Gagal menyimpan data ke Sheet.", env);
     }
 
     return new Response("OK");
