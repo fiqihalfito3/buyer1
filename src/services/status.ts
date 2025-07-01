@@ -5,7 +5,7 @@ export async function getStatuses(env: Env): Promise<string[]> {
     return raw ? JSON.parse(raw) as string[] : [];
 }
 
-export async function addStatuses(statuses: string, env: Env) {
-    const arrayStatuses = statuses.split(",").map(item => item.trim());
-    await env.TELEGRAM_STATE.put("statuses", JSON.stringify(arrayStatuses));
+export async function addStatuses(statuses: string[], env: Env) {
+    // const arrayStatuses = statuses.split(",").map(item => item.trim());
+    await env.TELEGRAM_STATE.put("statuses", JSON.stringify(statuses));
 }
