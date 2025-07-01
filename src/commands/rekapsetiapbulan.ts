@@ -25,13 +25,13 @@ export const handleRekapSetiapBulan: CommandHandler = async (chatId, keyword, en
     if (res.hasil.length > 0) {
         for (const item of res.hasil) {
             // per bulannya
-            pesan += `🗓️ *\n${item.bulan}*\n`;
-            pesan += `💰 total: *Rp ${item.total.toLocaleString("id-ID")}*\n`;
+            pesan += `\n🗓️ *${item.bulan}*\n`;
 
             item.kategori.forEach((k, i) => {
                 pesan += `- ${k.nama}: *Rp ${k.total.toLocaleString("id-ID")}* (${k.persen})\n`;
             })
 
+            pesan += `💰 total: *Rp ${item.total.toLocaleString("id-ID")}*\n`;
         }
     } else {
         pesan += '🍃 belum ada pengeluaran apa pun.'
