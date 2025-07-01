@@ -3,6 +3,7 @@ import type { UserState } from "../types";
 import { reply, sendInlineKeyboard } from "../services/telegram";
 import { getState, setState, clearState } from "../services/state";
 import { fetchSheetData } from "../services/sheet";
+import { getStatuses } from "../services/status";
 
 export async function handleInputCommand(chatId: string, keyword: string, env: Env) {
     const state: UserState = { step: 1 };
@@ -11,20 +12,28 @@ export async function handleInputCommand(chatId: string, keyword: string, env: E
 }
 
 export async function handleInputStep(chatId: string, text: string, state: UserState, env: Env): Promise<Response> {
+
+    const statuses = await getStatuses(env)
+
     if (state.step === 1) {
         state.kegiatan = text;
         state.step = 2;
         await setState(chatId, state, env);
-        return sendInlineKeyboard(chatId, "📍 Pilih status kegiatan:", [
-            [
-                { text: "✅ Kewajiban", callback_data: "status:Kewajiban" },
-                { text: "💚 Sedekah", callback_data: "status:Sedekah" }
-            ],
-            [
-                { text: "🟨 Emas", callback_data: "status:Emas" },
-                { text: "🌍 Duniawi", callback_data: "status:Duniawi" }
-            ],
-        ], env);
+        return sendInlineKeyboard(chatId, "📍 Pilih status kegiatan:",
+            //     [
+            //     // [
+            //     //     { text: "✅ Kewajiban", callback_data: "status:Kewajiban" },
+            //     //     { text: "💚 Sedekah", callback_data: "status:Sedekah" }
+            //     // ],
+            //     // [
+            //     //     { text: "🟨 Emas", callback_data: "status:Emas" },
+            //     //     { text: "🌍 Duniawi", callback_data: "status:Duniawi" }
+            //     // ],            
+            // ]
+            statuses.map((status, i) => {
+                return [{ text: status, callback_data: `status:${status}` }]
+            })
+            , env);
     }
 
     if (state.step === 3) {

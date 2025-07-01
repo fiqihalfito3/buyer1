@@ -8,6 +8,7 @@ import { handleRekapSetiapBulan } from '../commands/rekapsetiapbulan';
 import { handleRekapHariIni } from '../commands/rekaphariini';
 import { handletesterror } from '../commands/testerror';
 import { handleRekapBulanIni } from '../commands/rekapbulanini';
+import { handleStatusTambah } from '../commands/status_tambah';
 
 const commandMap: Record<string, CommandHandler> = {
     '/start': handleStart,
@@ -15,9 +16,8 @@ const commandMap: Record<string, CommandHandler> = {
     '/rekaphariini': handleRekapHariIni,
     '/rekapbulanini': handleRekapBulanIni,
     '/rekapsetiapbulan': handleRekapSetiapBulan,
-    // '/rekapkategorisetiapbulan'
-    // '/pengeluaranterbesar'
-    // '/persentasekategori'
+    '/status_tambah': handleStatusTambah,
+    // '/status_hapus'
     '/testerror': handletesterror
 };
 
