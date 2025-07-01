@@ -1,61 +1,55 @@
 import { Context } from 'hono';
-import { CommandHandler, Env, TelegramMessage } from '../types';
+import { Env, TelegramMessage } from '../types';
 import { getState } from '../services/state';
-import { handleStart } from '../commands/start';
-import { handleInputCommand, handleInputStep, handleInputCallback } from '../commands/input';
 import { handleDefault } from '../commands/default';
-import { handleRekapSetiapBulan } from '../commands/rekapsetiapbulan';
-import { handleRekapHariIni } from '../commands/rekaphariini';
-import { handletesterror } from '../commands/testerror';
-import { handleRekapBulanIni } from '../commands/rekapbulanini';
-import { handleStatusTambah } from '../commands/status_tambah';
+import { executeCallback, executeStepCommand, executeStepFlow, getSimpleCommandHandler, getStepCommandConfig } from '../services/command-router';
 
-const commandMap: Record<string, CommandHandler> = {
-    '/start': handleStart,
-    '/input': handleInputCommand,
-    '/rekaphariini': handleRekapHariIni,
-    '/rekapbulanini': handleRekapBulanIni,
-    '/rekapsetiapbulan': handleRekapSetiapBulan,
-    '/status_tambah': handleStatusTambah,
-    // '/status_hapus'
-    '/testerror': handletesterror
-};
 
-export async function handleTelegramUpdate(body: TelegramMessage, c: Context) {
+export async function handleTelegramUpdate(body: TelegramMessage, c: Context): Promise<Response> {
     console.log("hitted telegram handler");
-
     const env = c.env;
 
     // Handle callback (inline keyboard)
     if (body.callback_query) {
         const chatId = body.callback_query.from.id.toString();
         const data = body.callback_query.data;
-        return handleInputCallback(chatId, data, env); // delegasikan ke input.ts
+        const state = await getState(chatId, env);
+
+        if (state?.command) {
+            return executeCallback(chatId, data, state, env);
+        }
+        return new Response("OK");
     }
 
     console.log(JSON.stringify(body));
 
-    // Handle message teks biasa
+    // Handle text messages
     if (body.message?.text) {
         const chatId = body.message.chat.id.toString();
         const text = body.message.text.trim();
         const state = await getState(chatId, env);
 
-        // save chat id in whole code
-        c.set("chatId", chatId)
+        c.set("chatId", chatId);
 
-        // Jika pesan adalah command dan terdaftar
-        const commandHandler = commandMap[text.toLowerCase()];
-        if (commandHandler) {
-            return commandHandler(chatId, text.toLowerCase(), env);
+        // Check if it's a simple command
+        const simpleHandler = getSimpleCommandHandler(text);
+        if (simpleHandler) {
+            return simpleHandler(chatId, text.toLowerCase(), env);
         }
 
-        // Jika sedang dalam proses input
-        if (state?.step) {
-            return handleInputStep(chatId, text, state, env); // delegasikan ke input.ts
+        // Check if it's a step command
+        const stepConfig = getStepCommandConfig(text);
+        if (stepConfig) {
+            return executeStepCommand(text.toLowerCase(), chatId, env);
         }
 
-        return handleDefault(chatId, env); // fallback
+        // Handle ongoing step flow
+        if (state?.step && state?.command) {
+            return executeStepFlow(chatId, text, state, env);
+        }
+
+        // Default fallback
+        return handleDefault(chatId, env);
     }
 
     return c.text('OK');

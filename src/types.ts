@@ -10,19 +10,39 @@ export interface TelegramMessage {
     }
 }
 
-export interface UserState {
-    step?: number;
+export interface Env {
+    TELEGRAM_TOKEN: string;
+    WEB_APP_URL: string;
+    TELEGRAM_STATE: KVNamespace;
+}
+
+
+export interface StepState {
+    step: number;
+    command: string;
+}
+
+export interface InputState extends StepState {
     kegiatan?: string;
     status?: string;
     tanggal?: string;
     pengeluaran?: number;
 }
 
-export interface Env {
-    TELEGRAM_TOKEN: string;
-    WEB_APP_URL: string;
-    TELEGRAM_STATE: KVNamespace;
+export interface StatusState extends StepState {
+    statuses?: string
 }
+
+export interface StepCommandConfig {
+    initiate: (chatId: string, keyword: string, env: Env) => Promise<Response>;
+    handleStep: (chatId: string, text: string, state: StepState, env: Env) => Promise<Response>;
+    handleCallback?: (chatId: string, data: string, state: StepState, env: Env) => Promise<Response>;
+}
+
+
+
+
+
 
 export type CommandHandlerParam = {
     chatId: string,

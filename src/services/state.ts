@@ -1,11 +1,11 @@
-import { Env, UserState } from '../types';
+import { Env, StepState, InputState } from '../types';
 
-export async function getState(chatId: string, env: Env): Promise<UserState> {
+export async function getState(chatId: string, env: Env) {
     const raw = await env.TELEGRAM_STATE.get(chatId);
     return raw ? JSON.parse(raw) : {};
 }
 
-export async function setState(chatId: string, state: UserState, env: Env): Promise<void> {
+export async function setState(chatId: string, state: StepState, env: Env): Promise<void> {
     await env.TELEGRAM_STATE.put(chatId, JSON.stringify(state));
 }
 
