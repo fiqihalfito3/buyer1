@@ -4,7 +4,7 @@
     "compatibility_date": "2024-04-01",
     "main": "./src/index.tsx",
     "vars": {
-        "TELEGRAM_TOKEN": "7823679916:AAELqKb5PbMJ4ZOTRlCO4E1j42y8Cnftywg",
+        "TELEGRAM_TOKEN": "7393464454:AAHcoy70w1u47c2B6BWvQqtovtHoKS5gHus",
         "WEB_APP_URL": "https://script.google.com/macros/s/AKfycbxMqwZ-0cobA9pz7ZYpLlCvsQQSevR1DtXwinY_svGQxdfMDj4VX-jMdR9jDNFb8NgDfg/exec"
     },
     "observability": {
