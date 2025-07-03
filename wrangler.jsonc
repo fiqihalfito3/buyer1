@@ -5,7 +5,7 @@
     "main": "./src/index.tsx",
     "vars": {
         "TELEGRAM_TOKEN": "7393464454:AAHcoy70w1u47c2B6BWvQqtovtHoKS5gHus",
-        "WEB_APP_URL": "https://script.google.com/macros/s/AKfycbxMqwZ-0cobA9pz7ZYpLlCvsQQSevR1DtXwinY_svGQxdfMDj4VX-jMdR9jDNFb8NgDfg/exec"
+        "WEB_APP_URL": "https://script.google.com/macros/s/AKfycbxITcWEhPAOEb4t7n7Bgu0Z_XqDEduuQjFgeoLj4prC6q-rVJ94Ous_ihaBrK222RGf/exec"
     },
     "observability": {
         "logs": {
