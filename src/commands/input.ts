@@ -4,6 +4,7 @@ import { reply, sendInlineKeyboard } from "../services/telegram";
 import { getState, setState, clearState } from "../services/state";
 import { fetchSheetData } from "../services/sheet";
 import { getStatuses } from "../services/status";
+import { getTanggalHariIniWIB } from "../lib/utils";
 
 export async function initiateInputFlow(chatId: string, keyword: string, env: Env): Promise<Response> {
     const state: InputState = { step: 1, command: keyword };
@@ -117,7 +118,7 @@ export async function handleInputCallback(chatId: string, data: string, state: I
         const status = data.split(":")[1];
         state.status = status;
         state.step = 3;
-        state.tanggal = new Date().toISOString().split("T")[0];
+        state.tanggal = getTanggalHariIniWIB()
         await setState(chatId, state, env);
 
         await reply(chatId, `Status: ${status}`, env);
