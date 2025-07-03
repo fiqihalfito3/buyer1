@@ -14,8 +14,8 @@
     },
     "kv_namespaces": [
         {
-            "binding": "KV",
-            "id": "cd5a8b56419f41bd90babdeb2cdad113"
+            "binding": "TELEGRAM_STATE",
+            "id": "2e543f2a769a4187bcc1d81d7dc05441"
         }
     ]
 }
