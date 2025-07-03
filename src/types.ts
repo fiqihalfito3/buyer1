@@ -13,7 +13,7 @@ export interface TelegramMessage {
 export interface Env {
     TELEGRAM_TOKEN: string;
     WEB_APP_URL: string;
-    TELEGRAM_STATE: KVNamespace;
+    KV: KVNamespace;
 }
 
 
